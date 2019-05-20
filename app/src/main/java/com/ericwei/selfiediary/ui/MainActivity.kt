@@ -1,7 +1,8 @@
-package com.ericwei.selfiediary
+package com.ericwei.selfiediary.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.ericwei.selfiediary.R
 
 class MainActivity : AppCompatActivity() {
 
