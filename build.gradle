@@ -6,6 +6,8 @@ buildscript {
         nav_version = "2.1.0-alpha04"
         version_room = "2.0.0"
         version_lifecycle_extensions = "2.0.0"
+        version_kotlin_coroutines = "1.1.0"
+        version_glide = "4.8.0"
     }
     repositories {
         google()
