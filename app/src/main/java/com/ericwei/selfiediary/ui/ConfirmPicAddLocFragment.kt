@@ -1,0 +1,25 @@
+package com.ericwei.selfiediary.ui
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import com.ericwei.selfiediary.R
+import com.ericwei.selfiediary.databinding.FragmentConfirmPicAddLocBinding
+
+class ConfirmPicAddLocFragment : Fragment() {
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        val binding: FragmentConfirmPicAddLocBinding = DataBindingUtil.inflate(
+            inflater, R.layout.fragment_confirm_pic_add_loc, container, false
+        )
+
+        var args = ConfirmPicAddLocFragmentArgs.fromBundle(arguments!!).pictureTaken
+        binding.pictureTaken.setImageBitmap(args)
+
+        return binding.root
+    }
+}

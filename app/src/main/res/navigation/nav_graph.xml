@@ -4,5 +4,13 @@
             android:id="@+id/nav_graph" app:startDestination="@id/pictureGridFragment">
 
     <fragment android:id="@+id/pictureGridFragment" android:name="com.ericwei.selfiediary.ui.PictureGridFragment"
-              android:label="PictureGridFragment"/>
+              android:label="PictureGridFragment">
+        <action android:id="@+id/action_pictureGridFragment_to_confirmPicAddLocFragment"
+                app:destination="@id/confirmPicAddLocFragment"/>
+    </fragment>
+    <fragment android:id="@+id/confirmPicAddLocFragment"
+              android:name="com.ericwei.selfiediary.ui.ConfirmPicAddLocFragment"
+              android:label="ConfirmPicAddLocFragment">
+        <argument android:name="pictureTaken" app:argType="android.graphics.Bitmap"/>
+    </fragment>
 </navigation>
