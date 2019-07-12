@@ -47,7 +47,7 @@ class PictureGridFragment : Fragment() {
     }
 
     //launch intent to take picture
-    fun onPictureButtonClicked() {
+    private fun onPictureButtonClicked() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
             takePictureIntent.resolveActivity(context!!.packageManager)?.also {
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)

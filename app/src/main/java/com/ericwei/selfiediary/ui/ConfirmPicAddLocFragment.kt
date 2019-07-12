@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.ericwei.selfiediary.R
 import com.ericwei.selfiediary.databinding.FragmentConfirmPicAddLocBinding
 
@@ -20,6 +21,18 @@ class ConfirmPicAddLocFragment : Fragment() {
         var args = ConfirmPicAddLocFragmentArgs.fromBundle(arguments!!).pictureTaken
         binding.pictureTaken.setImageBitmap(args)
 
+        binding.saveBtn.setOnClickListener {
+            onSaveButtonClicked()
+        }
+
         return binding.root
+    }
+
+    private fun onSaveButtonClicked() {
+        //build the object (picture+location) and save to database
+
+
+        this.findNavController()
+            .navigate(ConfirmPicAddLocFragmentDirections.actionConfirmPicAddLocFragmentToPictureGridFragment())
     }
 }

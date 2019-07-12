@@ -12,5 +12,7 @@
               android:name="com.ericwei.selfiediary.ui.ConfirmPicAddLocFragment"
               android:label="ConfirmPicAddLocFragment">
         <argument android:name="pictureTaken" app:argType="android.graphics.Bitmap"/>
+        <action android:id="@+id/action_confirmPicAddLocFragment_to_pictureGridFragment"
+                app:destination="@id/pictureGridFragment"/>
     </fragment>
 </navigation>

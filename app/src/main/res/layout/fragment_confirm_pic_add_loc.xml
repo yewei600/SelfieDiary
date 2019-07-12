@@ -13,6 +13,11 @@
                    android:id="@+id/picture_taken"/>
 
         <Button android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:id="@+id/add_loc_btn"
+                android:text="Add location"/>
+
+        <Button android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:id="@+id/save_btn"
                 android:text="save"
         />
 
