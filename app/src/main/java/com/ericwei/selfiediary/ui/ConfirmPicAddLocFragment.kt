@@ -1,6 +1,7 @@
 package com.ericwei.selfiediary.ui
 
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,8 +19,10 @@ class ConfirmPicAddLocFragment : Fragment() {
             inflater, R.layout.fragment_confirm_pic_add_loc, container, false
         )
 
+        // val viewModel = ViewModelProviders.of(this).get(ConfirmV)
+
         var args = ConfirmPicAddLocFragmentArgs.fromBundle(arguments!!).pictureTaken
-        binding.pictureTaken.setImageBitmap(args)
+        binding.pictureTaken.setImageBitmap(MediaStore.Images.Media.getBitmap(context!!.contentResolver, args))
 
         binding.saveBtn.setOnClickListener {
             onSaveButtonClicked()
@@ -28,9 +31,9 @@ class ConfirmPicAddLocFragment : Fragment() {
         return binding.root
     }
 
+
     private fun onSaveButtonClicked() {
         //build the object (picture+location) and save to database
-
 
         this.findNavController()
             .navigate(ConfirmPicAddLocFragmentDirections.actionConfirmPicAddLocFragmentToPictureGridFragment())
