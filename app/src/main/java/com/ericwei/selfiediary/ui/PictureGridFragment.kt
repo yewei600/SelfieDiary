@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.ericwei.selfiediary.InjectorUtils
@@ -26,6 +27,11 @@ import java.util.*
 
 class PictureGridFragment : Fragment() {
 
+    private val mViewModel: PictureGridViewModel by lazy {
+        ViewModelProviders.of(
+            this, InjectorUtils.providePictureGridViewModelFactory(requireContext())
+        ).get(PictureGridViewModel::class.java)
+    }
     private val REQUEST_IMAGE_CAPTURE = 1
     lateinit var mCurrentPhotoPath: String
     lateinit var mPhotoURI: Uri
@@ -34,11 +40,9 @@ class PictureGridFragment : Fragment() {
         val binding: FragmentPictureGridBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_picture_grid, container, false
         )
+        binding.lifecycleOwner = this
 
-        val viewModel = ViewModelProviders.of(
-            this, InjectorUtils.providePictureGridViewModelFactory(requireContext())
-        ).get(PictureGridViewModel::class.java)
-
+        subscribeUi()
         //binding.photosGrid.adapter = PictureGridAdapter()
 
         binding.pictureBtn.setOnClickListener {
@@ -49,9 +53,10 @@ class PictureGridFragment : Fragment() {
     }
 
     private fun subscribeUi() {
-//        mViewModel.pictures.observe(viewLifecycleOwner, Observer {
-//
-//        })
+
+        mViewModel.pictures.observe(this, Observer {
+            Toast.makeText(context, "number of pictures=" + mViewModel.pictures.value!!.size, Toast.LENGTH_SHORT).show()
+        })
     }
 
 

@@ -1,6 +1,15 @@
 package com.ericwei.selfiediary.data
 
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.withContext
+
 class PicturesRepository(private val databaseDao: PictureDatabaseDao) {
+
+    suspend fun savePicture(picture: Picture) {
+        withContext(IO) {
+            databaseDao.insert(picture)
+        }
+    }
 
     fun getPictures() = databaseDao.getAllPictures()
 

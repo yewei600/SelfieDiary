@@ -3,7 +3,7 @@ package com.ericwei.selfiediary
 import android.content.Context
 import com.ericwei.selfiediary.data.AppDatabase
 import com.ericwei.selfiediary.data.PicturesRepository
-import com.ericwei.selfiediary.viewmodels.PictureGridViewModelFactory
+import com.ericwei.selfiediary.viewmodels.ViewModelFactory
 
 object InjectorUtils {
 
@@ -13,8 +13,8 @@ object InjectorUtils {
         )
     }
 
-    fun providePictureGridViewModelFactory(context: Context): PictureGridViewModelFactory {
+    fun providePictureGridViewModelFactory(context: Context): ViewModelFactory {
         val repository = getPicturesRepository(context)
-        return PictureGridViewModelFactory(repository)
+        return ViewModelFactory(repository)
     }
 }
