@@ -7,6 +7,8 @@
               android:label="PictureGridFragment">
         <action android:id="@+id/action_pictureGridFragment_to_confirmPicAddLocFragment"
                 app:destination="@id/confirmPicAddLocFragment"/>
+        <action android:id="@+id/action_pictureGridFragment_to_detailPictureFragment"
+                app:destination="@id/detailPictureFragment"/>
     </fragment>
     <fragment android:id="@+id/confirmPicAddLocFragment"
               android:name="com.ericwei.selfiediary.ui.ConfirmPicAddLocFragment"
@@ -14,5 +16,11 @@
         <argument android:name="pictureTaken" app:argType="android.net.Uri"/>
         <action android:id="@+id/action_confirmPicAddLocFragment_to_pictureGridFragment"
                 app:destination="@id/pictureGridFragment"/>
+    </fragment>
+    <fragment android:id="@+id/detailPictureFragment" android:name="com.ericwei.selfiediary.ui.DetailPictureFragment"
+              android:label="DetailPictureFragment">
+        <argument
+                android:name="selectedPicture"
+                app:argType="com.ericwei.selfiediary.data.Picture"/>
     </fragment>
 </navigation>

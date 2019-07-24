@@ -1,9 +1,12 @@
 package com.ericwei.selfiediary.data
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity(tableName = "daily_picture_table")
 data class Picture(
 
@@ -21,4 +24,4 @@ data class Picture(
 
     @ColumnInfo(name = "pic_url")
     val imageUrl: String
-)
+) : Parcelable

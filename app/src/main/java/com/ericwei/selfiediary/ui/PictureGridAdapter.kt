@@ -37,7 +37,7 @@ class PictureGridAdapter(val onClickListener: OnPictureClickListener) :
     override fun onBindViewHolder(holder: PictureViewHolder, position: Int) {
         val picture = getItem(position)
         holder.itemView.setOnClickListener {
-
+            onClickListener.onClick(picture)
         }
         holder.bind(picture)
     }
