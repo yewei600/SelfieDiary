@@ -35,6 +35,7 @@ class PictureGridFragment : Fragment() {
     private val REQUEST_IMAGE_CAPTURE = 1
     lateinit var mCurrentPhotoPath: String
     lateinit var mPhotoURI: Uri
+    lateinit var mAdapter: PictureGridAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding: FragmentPictureGridBinding = DataBindingUtil.inflate(
@@ -42,13 +43,17 @@ class PictureGridFragment : Fragment() {
         )
         binding.lifecycleOwner = this
 
-        subscribeUi()
-        //binding.photosGrid.adapter = PictureGridAdapter()
+        mAdapter = PictureGridAdapter(PictureGridAdapter.OnPictureClickListener {
+            Toast.makeText(context, "clicked picture", Toast.LENGTH_SHORT).show()
+        })
+
+        binding.photosGrid.adapter = mAdapter
 
         binding.pictureBtn.setOnClickListener {
             onPictureButtonClicked()
         }
 
+        subscribeUi()
         return binding.root
     }
 
@@ -56,6 +61,7 @@ class PictureGridFragment : Fragment() {
 
         mViewModel.pictures.observe(this, Observer {
             Toast.makeText(context, "number of pictures=" + mViewModel.pictures.value!!.size, Toast.LENGTH_SHORT).show()
+            mAdapter.submitList(it)
         })
     }
 

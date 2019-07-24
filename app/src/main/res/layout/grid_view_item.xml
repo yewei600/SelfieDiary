@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable name="picture_item"
                   type="com.ericwei.selfiediary.data.Picture"/>
@@ -11,5 +12,6 @@
             android:scaleType="centerCrop"
             android:adjustViewBounds="true"
             android:padding="2dp"
+            app:imageUrl="@{picture_item.imageUrl}"
             tools:src="@tools:sample/backgrounds/scenic"/>
 </layout>
