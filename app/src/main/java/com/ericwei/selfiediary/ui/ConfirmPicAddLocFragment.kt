@@ -16,10 +16,13 @@ import com.ericwei.selfiediary.data.Picture
 import com.ericwei.selfiediary.databinding.FragmentConfirmPicAddLocBinding
 import com.ericwei.selfiediary.viewmodels.ConfirmPicAddLocViewModel
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ConfirmPicAddLocFragment : Fragment() {
 
-    lateinit var mPhotoURI: Uri
+    private lateinit var mPhotoURI: Uri
+    private lateinit var mPictureObj: Picture
     private val mViewModel: ConfirmPicAddLocViewModel by lazy {
         ViewModelProviders.of(this, InjectorUtils.providePictureGridViewModelFactory(requireContext()))
             .get(ConfirmPicAddLocViewModel::class.java)
@@ -33,6 +36,14 @@ class ConfirmPicAddLocFragment : Fragment() {
         binding.lifecycleOwner = this
 
         mPhotoURI = ConfirmPicAddLocFragmentArgs.fromBundle(arguments!!).pictureTaken
+
+        val dateFormatter = SimpleDateFormat("yyyy-MM-dd,hh:mm aa")
+        val dateTime = dateFormatter.format(Calendar.getInstance().time).split(",")
+        mPictureObj = Picture(
+            picDate = dateTime[0], picTime = dateTime[1],
+            picLocation = "HardCode", imageUrl = mPhotoURI.toString()
+        )
+
         binding.pictureTaken.setImageBitmap(MediaStore.Images.Media.getBitmap(context!!.contentResolver, mPhotoURI))
 
         binding.saveBtn.setOnClickListener {
@@ -44,18 +55,11 @@ class ConfirmPicAddLocFragment : Fragment() {
 
 
     private fun onSaveButtonClicked() {
-        //build the object (picture+location) and save to database
-        val picture = Picture(
-            picDate = "04/07/2019",
-            picTime = "12:30pm",
-            picLocation = "North America",
-            imageUrl = mPhotoURI.toString()
-        )
-
-        mViewModel.savePicture(picture)
-
-        this.findNavController()
-            .navigate(ConfirmPicAddLocFragmentDirections.actionConfirmPicAddLocFragmentToPictureGridFragment())
+        mPictureObj?.let {
+            mViewModel.savePicture(it)
+            this.findNavController()
+                .navigate(ConfirmPicAddLocFragmentDirections.actionConfirmPicAddLocFragmentToPictureGridFragment())
+        }
     }
 
     private fun deletePhoto() {

@@ -3,13 +3,25 @@
     <data>
 
     </data>
-    <FrameLayout
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             tools:context=".ui.DetailPictureFragment">
 
-        <ImageView android:layout_width="match_parent" android:layout_height="match_parent"
-                   android:id="@+id/picture_view"/>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:gravity="center"
+                  android:id="@+id/pic_time_date"/>
 
-    </FrameLayout>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:gravity="center"
+                  android:id="@+id/pic_ind"/>
+
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:gravity="center"
+                  android:id="@+id/pic_location"/>
+
+        <ImageView android:layout_width="match_parent" android:layout_height="match_parent"
+                   android:id="@+id/pic_view"/>
+    </LinearLayout>
 </layout>

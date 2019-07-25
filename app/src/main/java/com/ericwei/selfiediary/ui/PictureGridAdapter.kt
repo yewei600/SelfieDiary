@@ -16,6 +16,7 @@ class PictureGridAdapter(val onClickListener: OnPictureClickListener) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(picture: Picture) {
             binding.pictureItem = picture
+            binding.picDate.text = picture.picDate
             binding.executePendingBindings()
         }
     }

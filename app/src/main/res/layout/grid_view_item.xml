@@ -5,13 +5,24 @@
         <variable name="picture_item"
                   type="com.ericwei.selfiediary.data.Picture"/>
     </data>
-    <ImageView
-            android:id="@+id/mars_image"
-            android:layout_width="match_parent"
-            android:layout_height="170dp"
-            android:scaleType="centerCrop"
-            android:adjustViewBounds="true"
-            android:padding="2dp"
-            app:imageUrl="@{picture_item.imageUrl}"
-            tools:src="@tools:sample/backgrounds/scenic"/>
+    <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent">
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"
+                android:padding="2dp"
+                app:imageUrl="@{picture_item.imageUrl}"
+                tools:src="@tools:sample/backgrounds/scenic"/>
+
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:id="@+id/pic_date"
+                  android:gravity="center"
+                  android:layout_marginBottom="12dp"
+                  android:textStyle="bold"
+                  android:textSize="18sp"
+                  android:textColor="@android:color/white"
+                  android:layout_gravity="bottom"/>
+
+    </FrameLayout>
 </layout>

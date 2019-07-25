@@ -22,7 +22,12 @@ class DetailPictureFragment : Fragment() {
 
         binding.lifecycleOwner = this
         val pictureObj = DetailPictureFragmentArgs.fromBundle(arguments!!).selectedPicture
-        binding.pictureView.setImageBitmap(
+
+        binding.picTimeDate.setText(pictureObj.picDate + "  " + pictureObj.picTime)
+
+        binding.picLocation.setText(pictureObj.picLocation)
+
+        binding.picView.setImageBitmap(
             MediaStore.Images.Media.getBitmap(
                 context!!.contentResolver,
                 Uri.parse(pictureObj.imageUrl)
