@@ -54,6 +54,9 @@ class PictureGridFragment : Fragment() {
         binding.pictureBtn.setOnClickListener {
             onPictureButtonClicked()
         }
+        binding.settingBtn.setOnClickListener {
+            onSettingsButtonClicked()
+        }
 
         subscribeUi()
         return binding.root
@@ -111,6 +114,12 @@ class PictureGridFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun onSettingsButtonClicked() {
+        this.findNavController().navigate(
+            PictureGridFragmentDirections.actionPictureGridFragmentToSettingsFragment()
+        )
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

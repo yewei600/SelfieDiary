@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/nav_graph" app:startDestination="@id/pictureGridFragment">
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
+            app:startDestination="@id/pictureGridFragment">
 
     <fragment android:id="@+id/pictureGridFragment" android:name="com.ericwei.selfiediary.ui.PictureGridFragment"
               android:label="PictureGridFragment">
@@ -9,6 +10,8 @@
                 app:destination="@id/confirmPicAddLocFragment"/>
         <action android:id="@+id/action_pictureGridFragment_to_detailPictureFragment"
                 app:destination="@id/detailPictureFragment"/>
+        <action android:id="@+id/action_pictureGridFragment_to_settingsFragment"
+                app:destination="@id/settingsFragment"/>
     </fragment>
     <fragment android:id="@+id/confirmPicAddLocFragment"
               android:name="com.ericwei.selfiediary.ui.ConfirmPicAddLocFragment"
@@ -23,4 +26,6 @@
                 android:name="selectedPicture"
                 app:argType="com.ericwei.selfiediary.data.Picture"/>
     </fragment>
+    <fragment android:id="@+id/settingsFragment" android:name="com.ericwei.selfiediary.ui.SettingsFragment"
+              android:label="fragment_settings" tools:layout="@layout/fragment_settings"/>
 </navigation>
