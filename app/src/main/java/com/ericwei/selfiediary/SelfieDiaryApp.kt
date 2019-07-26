@@ -22,7 +22,12 @@ class SelfieDiaryApp : Application() {
 
         val alarmActive = Intent(applicationContext, AppBroadcastReceiver::class.java).let { intent ->
             intent.action = "com.ericwei.selfiediary.action.SHOW_NOTIFICATION"
-            PendingIntent.getBroadcast(applicationContext, 0, intent, PendingIntent.FLAG_NO_CREATE)
+            PendingIntent.getBroadcast(
+                applicationContext,
+                PENDING_INTENT_REQUEST_CODE,
+                intent,
+                PendingIntent.FLAG_NO_CREATE
+            )
         }
         if (alarmActive == null) {
             registerNotificationAlarm(applicationContext)
@@ -30,18 +35,25 @@ class SelfieDiaryApp : Application() {
     }
 
     companion object {
+
+        val PENDING_INTENT_REQUEST_CODE = 333
+
         fun registerNotificationAlarm(context: Context) {
             val showNotificationIntent = Intent(context, AppBroadcastReceiver::class.java).let { intent ->
                 intent.action = "com.ericwei.selfiediary.action.SHOW_NOTIFICATION"
-                PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+                PendingIntent.getBroadcast(
+                    context,
+                    PENDING_INTENT_REQUEST_CODE,
+                    intent,
+                    PendingIntent.FLAG_UPDATE_CURRENT
+                )
             }
 
             var alarmMgr = context!!.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
             val calendar: Calendar = Calendar.getInstance().apply {
                 timeInMillis = System.currentTimeMillis()
-                set(Calendar.HOUR_OF_DAY, 16)
-                set(Calendar.MINUTE, 30)
+                set(Calendar.HOUR_OF_DAY, 17)
             }
 
             alarmMgr?.setRepeating(

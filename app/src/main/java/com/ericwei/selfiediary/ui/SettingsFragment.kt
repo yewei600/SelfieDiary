@@ -1,20 +1,33 @@
 package com.ericwei.selfiediary.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.preference.Preference
+import androidx.preference.PreferenceFragmentCompat
 import com.ericwei.selfiediary.R
 
-class SettingsFragment : Fragment() {
+class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClickListener,
+    Preference.OnPreferenceChangeListener {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false)
+    private lateinit var mTimePickerPref: Preference
+
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+        setPreferencesFromResource(R.xml.preferences, rootKey)
+
+        mTimePickerPref = preferenceManager.findPreference<Preference>("time_picker")!!
+        mTimePickerPref.onPreferenceClickListener = this
+    }
+
+    override fun onPreferenceChange(preference: Preference?, newValue: Any?): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onPreferenceClick(preference: Preference?): Boolean {
+        when (preference!!.key) {
+            "time_picker" -> {
+                TimePickerFragment().show(fragmentManager!!, "timePicker")
+            }
+        }
+        return true
     }
 
 }
