@@ -44,8 +44,7 @@ class PictureGridFragment : Fragment() {
         binding.lifecycleOwner = this
 
         mAdapter = PictureGridAdapter(PictureGridAdapter.OnPictureClickListener {
-            Toast.makeText(context, "clicked picture=" + it.picId, Toast.LENGTH_SHORT).show()
-
+            //Toast.makeText(context, "clicked picture=" + it.picId, Toast.LENGTH_SHORT).show()
             mViewModel.displaySelectedPicture(it)
         })
 
@@ -65,7 +64,7 @@ class PictureGridFragment : Fragment() {
     private fun subscribeUi() {
 
         mViewModel.pictures.observe(this, Observer {
-            Toast.makeText(context, "number of pictures=" + mViewModel.pictures.value!!.size, Toast.LENGTH_SHORT).show()
+            //Toast.makeText(context, "number of pictures=" + mViewModel.pictures.value!!.size, Toast.LENGTH_SHORT).show()
             mAdapter.submitList(it)
         })
 
