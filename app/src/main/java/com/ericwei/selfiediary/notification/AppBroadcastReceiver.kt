@@ -10,6 +10,7 @@ import android.os.Build
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.preference.PreferenceManager
 import com.ericwei.selfiediary.R
 import com.ericwei.selfiediary.SelfieDiaryApp
 import com.ericwei.selfiediary.ui.MainActivity
@@ -19,8 +20,13 @@ class AppBroadcastReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         when (intent!!.action) {
             "android.intent.action.BOOT_COMPLETED" -> {
-                SelfieDiaryApp.registerNotificationAlarm(context!!)
-                Toast.makeText(context, "BOOT completed from SelfieDiary app!!!", Toast.LENGTH_SHORT).show()
+                val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context)
+                if (sharedPrefs.getBoolean(context!!.getString(R.string.notification_enable), false)) {
+                    SelfieDiaryApp.registerNotificationAlarm(context!!)
+                } else {
+                    SelfieDiaryApp.cancelNotificationAlarm(context!!)
+                    Toast.makeText(context, "BOOT completed cancel alarm", Toast.LENGTH_SHORT).show()
+                }
             }
             "com.ericwei.selfiediary.action.SHOW_NOTIFICATION" -> {
 

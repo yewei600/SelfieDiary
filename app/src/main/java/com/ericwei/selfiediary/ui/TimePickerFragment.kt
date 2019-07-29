@@ -3,9 +3,11 @@ package com.ericwei.selfiediary.ui
 import android.app.Dialog
 import android.app.TimePickerDialog
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.text.format.DateFormat
 import android.widget.TimePicker
 import androidx.fragment.app.DialogFragment
+import com.ericwei.selfiediary.R
 import java.util.*
 
 class TimePickerFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener {
@@ -20,7 +22,14 @@ class TimePickerFragment : DialogFragment(), TimePickerDialog.OnTimeSetListener 
         return TimePickerDialog(activity, this, hour, minute, DateFormat.is24HourFormat(activity))
     }
 
-    override fun onTimeSet(p0: TimePicker?, p1: Int, p2: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onTimeSet(p0: TimePicker?, hourOfDay: Int, minute: Int) {
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
+        with(sharedPref.edit()) {
+            putString(
+                getString(R.string.saved_notification_time),
+                "$hourOfDay:$minute"
+            )
+            commit()
+        }
     }
 }

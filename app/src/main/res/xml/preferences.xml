@@ -6,11 +6,11 @@
             app:title="Notification">
 
         <SwitchPreferenceCompat
-                app:key="notifications"
+                app:key="@string/notification_enable"
                 app:title="Daily Reminders"/>
 
         <Preference
-                app:key="time_picker"
+                app:key="@string/saved_notification_time"
                 app:title="Time"
                 app:summary="Choose your reminder time"/>
     </PreferenceCategory>
