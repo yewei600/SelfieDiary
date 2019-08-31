@@ -25,7 +25,7 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class PictureGridFragment : Fragment() {
+class PictureGridFragment : Fragment(), View.OnClickListener {
 
     private val mViewModel: PictureGridViewModel by lazy {
         ViewModelProviders.of(
@@ -50,12 +50,9 @@ class PictureGridFragment : Fragment() {
 
         binding.photosGrid.adapter = mAdapter
 
-        binding.pictureBtn.setOnClickListener {
-            onPictureButtonClicked()
-        }
-        binding.settingBtn.setOnClickListener {
-            onSettingsButtonClicked()
-        }
+        binding.pictureBtn.setOnClickListener(this)
+        binding.settingBtn.setOnClickListener(this)
+        binding.playBtn.setOnClickListener(this)
 
         subscribeUi()
         return binding.root
@@ -93,6 +90,12 @@ class PictureGridFragment : Fragment() {
         }
     }
 
+    private fun onPlayButtonClicked() {
+        this.findNavController().navigate(
+            PictureGridFragmentDirections.actionPictureGridFragmentToVideoConfigFragment()
+        )
+    }
+
     //launch intent to take picture
     private fun onPictureButtonClicked() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
@@ -120,6 +123,15 @@ class PictureGridFragment : Fragment() {
             PictureGridFragmentDirections.actionPictureGridFragmentToSettingsFragment()
         )
     }
+
+    override fun onClick(v: View?) {
+        when (v!!.id) {
+            R.id.picture_btn -> onPictureButtonClicked()
+            R.id.play_btn -> onPlayButtonClicked()
+            R.id.setting_btn -> onSettingsButtonClicked()
+        }
+    }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

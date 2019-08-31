@@ -12,6 +12,8 @@
                 app:destination="@id/detailPictureFragment"/>
         <action android:id="@+id/action_pictureGridFragment_to_settingsFragment"
                 app:destination="@id/settingsFragment"/>
+        <action android:id="@+id/action_pictureGridFragment_to_videoConfigFragment"
+                app:destination="@id/videoConfigFragment"/>
     </fragment>
     <fragment android:id="@+id/confirmPicAddLocFragment"
               android:name="com.ericwei.selfiediary.ui.ConfirmPicAddLocFragment"
@@ -28,4 +30,11 @@
     </fragment>
     <fragment android:id="@+id/settingsFragment" android:name="com.ericwei.selfiediary.ui.SettingsFragment"
               android:label="fragment_settings" tools:layout="@layout/fragment_settings"/>
+    <fragment android:id="@+id/videoConfigFragment" android:name="com.ericwei.selfiediary.ui.VideoConfigFragment"
+              android:label="fragment_video_config" tools:layout="@layout/fragment_video_config">
+        <action android:id="@+id/action_videoConfigFragment_to_datesPickerFragment"
+                app:destination="@id/datesPickerFragment"/>
+    </fragment>
+    <fragment android:id="@+id/datesPickerFragment" android:name="com.ericwei.selfiediary.ui.DatesPickerFragment"
+              android:label="fragment_dates_picker" tools:layout="@layout/fragment_dates_picker"/>
 </navigation>
