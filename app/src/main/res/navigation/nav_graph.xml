@@ -21,6 +21,8 @@
         <argument android:name="pictureTaken" app:argType="android.net.Uri"/>
         <action android:id="@+id/action_confirmPicAddLocFragment_to_pictureGridFragment"
                 app:destination="@id/pictureGridFragment"/>
+        <action android:id="@+id/action_confirmPicAddLocFragment_to_locationPickerFragment"
+                app:destination="@id/locationPickerFragment"/>
     </fragment>
     <fragment android:id="@+id/detailPictureFragment" android:name="com.ericwei.selfiediary.ui.DetailPictureFragment"
               android:label="DetailPictureFragment">
@@ -37,4 +39,6 @@
     </fragment>
     <fragment android:id="@+id/datesPickerFragment" android:name="com.ericwei.selfiediary.ui.DatesPickerFragment"
               android:label="fragment_dates_picker" tools:layout="@layout/fragment_dates_picker"/>
+    <fragment android:id="@+id/locationPickerFragment" android:name="com.ericwei.selfiediary.ui.LocationPickerFragment"
+              android:label="LocationPickerFragment"/>
 </navigation>

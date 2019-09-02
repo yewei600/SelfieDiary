@@ -5,4 +5,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="saved_notification_time">saved_notification_time</string>
     <string name="notification_enable">notification_enable</string>
+    <string name="title_activity_location_picker_fragment">Map</string>
 </resources>

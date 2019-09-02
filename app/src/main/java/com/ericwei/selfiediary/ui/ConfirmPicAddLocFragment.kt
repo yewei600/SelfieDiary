@@ -46,6 +46,11 @@ class ConfirmPicAddLocFragment : Fragment() {
 
         binding.pictureTaken.setImageBitmap(MediaStore.Images.Media.getBitmap(context!!.contentResolver, mPhotoURI))
 
+        binding.addLocBtn.setOnClickListener {
+            this.findNavController()
+                .navigate(ConfirmPicAddLocFragmentDirections.actionConfirmPicAddLocFragmentToLocationPickerFragment())
+        }
+
         binding.saveBtn.setOnClickListener {
             onSaveButtonClicked()
         }
