@@ -8,4 +8,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="date_picker_theme" parent="@android:style/Widget.DatePicker"/>
+
 </resources>
