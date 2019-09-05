@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.ericwei.selfiediary.databinding.FragmentDetailPictureBinding
 import com.ericwei.selfiediary.viewmodels.DetailPictureViewModel
 
@@ -26,6 +27,12 @@ class DetailPictureFragment : Fragment() {
         binding.picTimeDate.setText(pictureObj.picDate + "  " + pictureObj.picTime)
 
         binding.picLocation.setText(pictureObj.picLocation)
+
+        binding.picLocation.setOnClickListener {
+            this.findNavController().navigate(
+                DetailPictureFragmentDirections.actionDetailPictureFragmentToPictureLocMapFragment()
+            )
+        }
 
         binding.picView.setImageBitmap(
             MediaStore.Images.Media.getBitmap(

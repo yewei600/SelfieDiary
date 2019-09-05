@@ -19,21 +19,14 @@ import com.ericwei.selfiediary.R
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
 import com.google.android.libraries.places.api.net.PlacesClient
 
 
-class LocationPickerFragment : Fragment(), OnMapReadyCallback {
-
-    private lateinit var mMap: GoogleMap
+class LocationPickerFragment : Fragment() {
 
     // New variables for Current Place Picker
     private val TAG = "LocationPickerFragment"
@@ -53,7 +46,7 @@ class LocationPickerFragment : Fragment(), OnMapReadyCallback {
     private var mLocationPermissionGranted: Boolean = false
 
     // Used for selecting the current place.
-    private val M_MAX_ENTRIES = 5
+    private val M_MAX_ENTRIES = 20
     private var mLikelyPlaceNames = mutableListOf<String?>()
     private var mLikelyPlaceAddresses = mutableListOf<String?>()
     private var mLikelyPlaceAttributions = mutableListOf<String?>()
@@ -62,9 +55,6 @@ class LocationPickerFragment : Fragment(), OnMapReadyCallback {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         //return super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_location_picker, container, false)
-
-        val mapFragment = this.childFragmentManager!!.findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
 
         val placesList = view.findViewById<ListView>(R.id.listPlaces)
         mListAdapter = ArrayAdapter(this.context, android.R.layout.simple_list_item_1, mLikelyPlaceNames)
@@ -103,28 +93,6 @@ class LocationPickerFragment : Fragment(), OnMapReadyCallback {
                 getDeviceLocation()
             }
         }
-    }
-
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
-    override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
-
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
-
-        mMap.uiSettings.isZoomControlsEnabled = true
-        getLocationPermission()
     }
 
     @SuppressLint("MissingPermission")
@@ -172,21 +140,21 @@ class LocationPickerFragment : Fragment(), OnMapReadyCallback {
                         mLastKnownLocation = task.result
                         Log.d(TAG, "Latitude: " + mLastKnownLocation!!.latitude)
                         Log.d(TAG, "Longitude: " + mLastKnownLocation!!.longitude)
-                        mMap.moveCamera(
-                            CameraUpdateFactory.newLatLngZoom(
-                                LatLng(
-                                    mLastKnownLocation!!.latitude,
-                                    mLastKnownLocation!!.longitude
-                                ), DEFAULT_ZOOM
-                            )
-                        )
+//                        mMap.moveCamera(
+//                            CameraUpdateFactory.newLatLngZoom(
+//                                LatLng(
+//                                    mLastKnownLocation!!.latitude,
+//                                    mLastKnownLocation!!.longitude
+//                                ), DEFAULT_ZOOM
+//                            )
+//                        )
                     } else {
                         Log.d(TAG, "Current location is null. Using defaults.");
                         Log.e(TAG, "Exception: %s", task.exception)
-                        mMap.moveCamera(
-                            CameraUpdateFactory
-                                .newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM)
-                        )
+//                        mMap.moveCamera(
+//                            CameraUpdateFactory
+//                                .newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM)
+//                        )
                     }
                     getCurrentPlaceLikelihoods()
                 }
@@ -203,17 +171,5 @@ class LocationPickerFragment : Fragment(), OnMapReadyCallback {
         if (mLikelyPlaceAttributions[position] != null) {
             markerSnippet = markerSnippet + "\n" + mLikelyPlaceAttributions[position];
         }
-
-        // Add a marker for the selected place, with an info window
-        // showing information about that place.
-        mMap.addMarker(
-            MarkerOptions()
-                .title(mLikelyPlaceNames[position])
-                .position(markerLatLng!!)
-                .snippet(markerSnippet)
-        )
-
-        // Position the map's camera at the location of the marker.
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(markerLatLng));
     }
 }

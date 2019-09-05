@@ -29,6 +29,8 @@
         <argument
                 android:name="selectedPicture"
                 app:argType="com.ericwei.selfiediary.data.Picture"/>
+        <action android:id="@+id/action_detailPictureFragment_to_pictureLocMapFragment"
+                app:destination="@id/pictureLocMapFragment"/>
     </fragment>
     <fragment android:id="@+id/settingsFragment" android:name="com.ericwei.selfiediary.ui.SettingsFragment"
               android:label="fragment_settings" tools:layout="@layout/fragment_settings"/>
@@ -41,4 +43,6 @@
               android:label="fragment_dates_picker" tools:layout="@layout/fragment_dates_picker"/>
     <fragment android:id="@+id/locationPickerFragment" android:name="com.ericwei.selfiediary.ui.LocationPickerFragment"
               android:label="LocationPickerFragment"/>
+    <fragment android:id="@+id/pictureLocMapFragment" android:name="com.ericwei.selfiediary.ui.PictureLocMapFragment"
+              android:label="fragment_picture_loc_map" tools:layout="@layout/fragment_picture_loc_map"/>
 </navigation>
